@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-je=9r%)vlcfl%w(tos%3#9zpt!_&%27y%m2ir8zl!m#ma+jqk2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get('DEBUG', default=1))
+DEBUG = int(os.getenv('DEBUG', default=1))
 
 ALLOWED_HOSTS = []
 
@@ -32,6 +32,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    # Tutorials application
+    'theater_platform.apps.TheaterPlatformConfig',
+    # Django REST framework
+    'rest_framework',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,8 +82,12 @@ WSGI_APPLICATION = 'web_server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'theater_platform',
+        'USER': 'theater_admin',
+        'PASSWORD': 'theater_platform2021',
+        'HOST': os.getenv('HOST', default=''),
+        'PORT': '3306',
     }
 }
 
