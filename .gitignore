@@ -60,7 +60,11 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-#python virtual environments
-
+# Python virtual environments
+.env
 .venv
-.virtualenv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
