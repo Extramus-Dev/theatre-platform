@@ -61,7 +61,6 @@ pnpm-debug.log*
 *.sw?
 
 # Python virtual environments
-.env
 .venv
 env/
 venv/
@@ -147,7 +146,6 @@ celerybeat-schedule.*
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
