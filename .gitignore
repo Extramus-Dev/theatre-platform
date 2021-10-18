@@ -59,3 +59,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+#python virtual environments
+
+.venv/
+.virtualenv/
