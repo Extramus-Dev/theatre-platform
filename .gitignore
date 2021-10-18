@@ -62,5 +62,5 @@ pnpm-debug.log*
 
 #python virtual environments
 
-.venv/
-.virtualenv/
+.venv
+.virtualenv
