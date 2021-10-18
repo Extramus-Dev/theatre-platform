@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'web_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'theater_platform',
-        'USER': 'theater_admin',
-        'PASSWORD': 'theater_platform2021',
-        'HOST': os.getenv('HOST', default=''),
-        'PORT': '3306',
+        'NAME': os.getenv('DB_NAME', default=''),
+        'USER': os.getenv('DB_USER', default=''),
+        'PASSWORD': os.getenv('DB_PASSWORD', default=''),
+        'HOST': os.getenv('DB_HOST', default=''),
+        'PORT': os.getenv('DB_PORT', default=''),
     }
 }
 
