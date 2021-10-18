@@ -26,8 +26,6 @@ docker-compose up
 ```bash
 docker-compose down
 ```
-<hr>
-
 ## Customize configuration
 Check our **docker-compose.yaml** and **Dockerfile** for each component file for personalized information. <br><br>
 See [Docker Compose Configuration](https://docs.docker.com/compose/compose-file/) <br> 
