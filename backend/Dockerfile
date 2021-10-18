@@ -1,7 +1,10 @@
-# syntax=docker/dockerfile:1
-FROM python:3
-ENV PYTHONUNBUFFERED=1
-WORKDIR /code
-COPY requirements.txt /code/
-RUN pip install -r requirements.txt
-COPY . /code/
+FROM python:3.9-alpine
+ENV PYTHONUNBUFFERED 1
+WORKDIR /app
+
+RUN python -m pip install --upgrade pip
+
+COPY requirements.txt /app/requirements.txt
+RUN python -m pip install -r /app/requirements.txt
+
+COPY . /app/

@@ -1,3 +1,4 @@
 #superuser settings
-##username: root
-##password: rootpassword
+
+username: root<br>
+password: rootpassword
