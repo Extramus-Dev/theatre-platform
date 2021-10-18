@@ -28,7 +28,7 @@ docker-compose down
 ```
 <hr>
 
-##Customize configuration
+## Customize configuration
 Check our **docker-compose.yaml** and **Dockerfile** for each component file for personalized information. <br><br>
 See [Docker Compose Configuration](https://docs.docker.com/compose/compose-file/) <br> 
 See [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
