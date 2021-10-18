@@ -9,4 +9,4 @@ services:
       context: DMarketing-web-main
       dockerfile: Dockerfile
     ports:
-      - 3000:3000 # Map the exposed port 3000 on the container to port 3000 on the host machine
+      - "2001:8080" # Map the exposed port 2001 on the container to port 8080 on the host machine
