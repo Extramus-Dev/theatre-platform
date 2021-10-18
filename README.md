@@ -1,9 +1,9 @@
-# DMarketing-web
+# Theater Platform
 Web Application for Theatrix Platform
 
 **Requirements:**
 - docker >= `20.10.8`
-##Project Setup (Development)
+## Project Setup (Development)
 ### 1. Docker Installation
 See [Docker Installation](https://docs.docker.com/engine/install/ubuntu/)
 ### 2. Clone from github
