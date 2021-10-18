@@ -4,9 +4,30 @@ version: '3.8'
 
 # Different Components of the Application
 services:
+  web-api:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - appdata:/app/volume
+    ports:
+      - "8000:8000"
+    command: python /app/manage.py runserver 0.0.0.0:8000
+    networks:
+      - frontend
+
   web-ui:
     build:
       context: DMarketing-web-main
       dockerfile: Dockerfile
     ports:
       - "2001:8080" # Map the exposed port 2001 on the container to port 8080 on the host machine
+    networks:
+      - frontend
+
+volumes:
+  appdata:
+
+networks:
+  frontend:
