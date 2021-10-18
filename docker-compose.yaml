@@ -18,6 +18,8 @@ services:
     networks:
       - backend
       - frontend
+    depends_on:
+      - db
 
   web-ui:
     build:
@@ -27,6 +29,8 @@ services:
       - "2001:8080" # Map the exposed port 2001 on the container to port 8080 on the host machine
     networks:
       - frontend
+    depends_on:
+      - web-api
 
   # Database Service (Mysql)
   db:
