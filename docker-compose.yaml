@@ -10,14 +10,19 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
+    ports:
+      - '2003:${SERVER_PORT}'
     restart: always
-    env_file:
-      - ./.env
+    environment:
+      DEBUG: '1'
+      DB_HOST: ${DB_CONTAINER}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_USER_PW}
     volumes:
       - appdata:/app/volume
-    ports:
-      - "${SERVER_PORT}:${SERVER_PORT}"
-    command: python /app/manage.py runserver 0.0.0.0:${SERVER_PORT}
+    command: python /app/manage.py runserver localhost:${SERVER_PORT}
     networks:
       - backend
       - frontend
@@ -25,11 +30,12 @@ services:
       - db
 
   web-ui:
+    container_name: ${WEB_CONTAINER}
     build:
       context: DMarketing-web-main
       dockerfile: Dockerfile
     ports:
-      - "2001:8080" # Map the exposed port 2001 on the container to port 8080 on the host machine
+      - "2004:${WEB_PORT}"
     networks:
       - frontend
     depends_on:
@@ -38,14 +44,14 @@ services:
   # Database Service (Mysql)
   db:
     container_name: ${DB_CONTAINER}
-    image: mysql:5.7
+    image: ${DB_IMAGE}
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - "2005:${DB_PORT}"
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${DB_USER_PW}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
     volumes:
       - db-data:/var/lib/mysql
     networks:
