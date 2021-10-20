@@ -141,3 +141,5 @@ GRAPH_MODELS = {
     'all_applications': True,
     'group_models': True,
 }
+
+AUTH_USER_MODEL = 'theater_platform.User'
