@@ -1,0 +1,2 @@
+#python - create graph model
+python manage.py graph_models --pydot -a -g -o appdata/erd.png
