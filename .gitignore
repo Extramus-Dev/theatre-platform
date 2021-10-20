@@ -186,4 +186,7 @@ GitHub.sublime-settings
 
 #docker volumes
 # Optional to ignore
-docker-volumes/
+volumes/
+
+#bash commands
+graph.sh

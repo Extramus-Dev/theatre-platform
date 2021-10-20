@@ -1,16 +1,18 @@
-FROM python:3.9-alpine
+FROM python:3.9
 ENV PYTHONUNBUFFERED 1
+
+# Set app directory
 WORKDIR /app
+COPY . /app/
 
 # install python dependencies
 RUN python -m pip install --upgrade pip
-
-#dependencies listed
-RUN python -m pip install Django
-RUN python -m pip install djangorestframework
-RUN python -m pip install django-extensions
+# dependencies
+RUN python -m pip install Django djangorestframework django-extensions
 RUN python -m pip install pymysql
 RUN python -m pip install python-dotenv
+RUN python -m pip install pyparsing pydot
 
-# Copy application to container
-COPY . /app/
+# install graphviz
+# RUN apt-get -y update
+# RUN apt-get install -y graphviz
