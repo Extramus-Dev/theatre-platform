@@ -10,10 +10,10 @@ services:
     container_name: theater-platform-db
     image: mysql:5.7
     ports:
-      - "2003:3306"
+      - '2003:3306'
     restart: always
     environment:
-      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_DATABASE: theater_platform
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_USER_PW}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
@@ -22,9 +22,9 @@ services:
     networks:
       - backend
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 3
+      test: ['CMD', 'mysqladmin' ,'ping', '-h', 'localhost']
+      timeout: 5s
+      retries: 10
 
   app-backend:
     container_name: theater-platform-django-api-server
@@ -34,15 +34,15 @@ services:
     ports:
       - '2004:8000'
     command: >
-      sh -c "python manage.py makemigrations &&
+      sh -c 'python manage.py makemigrations &&
              python manage.py migrate &&
-             python manage.py runserver 8000"
+             python manage.py runserver 8000'
     restart: on-failure
     environment:
       DEBUG: '1'
       DB_HOST: theater-platform-db
       DB_PORT: 3306
-      DB_NAME: ${DB_NAME}
+      DB_NAME: theater_platform
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_USER_PW}
     networks:
@@ -58,12 +58,11 @@ services:
       context: frontend
       dockerfile: Dockerfile
     ports:
-      - "2005:8080"
+      - '2005:8080'
     networks:
       - frontend
 
 volumes:
-  appdata:
   db-data:
 
 networks:
