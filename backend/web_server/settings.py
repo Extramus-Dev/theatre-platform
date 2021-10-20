@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'theater_platform.apps.TheaterPlatformConfig',
     # Django REST framework
     'rest_framework',
+    # Django extensions
+    'django_extensions',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -134,3 +136,5 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'theater_platform.User'
