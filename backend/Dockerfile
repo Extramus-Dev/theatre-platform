@@ -4,8 +4,13 @@ WORKDIR /app
 
 # install python dependencies
 RUN python -m pip install --upgrade pip
-COPY requirements.txt /app/requirements.txt
-RUN python -m pip install -r /app/requirements.txt
+
+#dependencies listed
+RUN python -m pip install Django
+RUN python -m pip install djangorestframework
+RUN python -m pip install django-extensions
+RUN python -m pip install pymysql
+RUN python -m pip install python-dotenv
 
 # Copy application to container
 COPY . /app/
