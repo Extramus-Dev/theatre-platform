@@ -1,4 +1,5 @@
-FROM python:3.9
+# Base image for newly image. Alpine version is lightweigther.
+FROM python:3.9-alpine
 ENV PYTHONUNBUFFERED 1
 
 # Set app directory
