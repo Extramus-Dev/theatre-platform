@@ -78,10 +78,17 @@ class ContentCreator(User):
     pass
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=128)
+
+
 class AlbumContent(models.Model):
     creator = models.ForeignKey(ContentCreator, on_delete=models.CASCADE)
-    name = models.CharField(max_length=128)
+    title = models.CharField(max_length=128)
+    description = models.CharField(max_length=512)
     date_creation = models.DateField()
+    categories = models.ManyToManyField(Category)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
 
 
 class Content(models.Model):
@@ -100,10 +107,17 @@ class Video(Content):
 
 class Purchase(models.Model):
     viewer = models.ForeignKey(Viewer, on_delete=models.CASCADE)
-    album = models.ForeignKey(AlbumContent, on_delete=models.CASCADE)
     date_register = models.DateField()
     value = models.DecimalField(max_digits=6, decimal_places=2)
     is_paid = models.BooleanField()
+
+
+class ContentPurchase(Purchase):
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+
+
+class AlbumPurchase(Purchase):
+    album = models.ForeignKey(AlbumContent, on_delete=models.CASCADE)
 
 
 class Subscription(models.Model):
