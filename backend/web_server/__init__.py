@@ -1,4 +1,3 @@
-import pymysql
 import dotenv
 import logging
 
@@ -8,6 +7,5 @@ logging.basicConfig(level=logging.DEBUG,
                     datefmt='%m-%d %H:%M:%S')
 
 dotenv.load_dotenv()
-pymysql.install_as_MySQLdb()
 
 logger = logging.getLogger('Server_api_django')
