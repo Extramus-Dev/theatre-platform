@@ -3,9 +3,10 @@ ENV PYTHONUNBUFFERED 1
 
 # Set app directory
 WORKDIR /app
-COPY theater_platform /app/theater_platform/
-COPY web_server       /app/web_server/
 COPY manage.py        /app/manage.py
+COPY web_server       /app/web_server/
+
+COPY theater_platform /app/theater_platform/
 
 # Install necessary packages
 RUN apk update
