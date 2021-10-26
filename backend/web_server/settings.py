@@ -23,8 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-je=9r%)vlcfl%w(tos%3#9zpt!_&%27y%m2ir8zl!m#ma+jqk2'
 
+# ENVIRONMENT VARIABLES: Necessary to deploy application
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.getenv('DEBUG', default=1))
+DEBUG = int(os.environ.get('DEBUG', 1))
+
+DB_HOST = os.environ.get('DB_HOST', '')
+DB_PORT = os.environ.get('DB_PORT', '')
+DB_NAME = os.environ.get('DB_NAME', '')
+DB_USER = os.environ.get('DB_USER', '')
+DB_PAWO = os.environ.get('DB_PASSWORD', '')
 
 ALLOWED_HOSTS = []
 
@@ -85,11 +93,11 @@ WSGI_APPLICATION = 'web_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', default=''),
-        'USER': os.getenv('DB_USER', default=''),
-        'PASSWORD': os.getenv('DB_PASSWORD', default=''),
-        'HOST': os.getenv('DB_HOST', default=''),
-        'PORT': os.getenv('DB_PORT', default=''),
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PAWO,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
 
