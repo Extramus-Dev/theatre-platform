@@ -17,7 +17,6 @@ RUN apk add --no-cache mariadb-dev
 RUN python -m pip install --upgrade pip
 RUN python -m pip install Django djangorestframework django-extensions
 RUN python -m pip install mysqlclient
-RUN python -m pip install python-dotenv
 
 # Uninstall no more necessary packages
 RUN apk del build-deps

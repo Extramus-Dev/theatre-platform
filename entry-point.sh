@@ -11,5 +11,6 @@ export DB_NAME=theater-platform
 export DB_USER='theater_admin'
 export DB_USER_PW='theater_platform2021'
 export DB_ROOT_PW=root
+
 docker-compose build
 docker-compose up
