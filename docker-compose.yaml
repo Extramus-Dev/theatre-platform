@@ -2,47 +2,50 @@
 
 version: '3.8'
 
+# Environment Variables
+
+
 # Different Components of the Application
 services:
 
   # Database Service (Mysql)
   app-db:
-    container_name: theater-platform-db
-    image: mysql:5.7
+    container_name: ${DB_HOST}
     ports:
-      - '2003:3306'
+      - '2003:${DB_PORT}'
+    image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: theater_platform
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_USER_PW}
+      MYSQL_DATABASE:      ${DB_NAME}
+      MYSQL_USER:          ${DB_USER}
+      MYSQL_PASSWORD:      ${DB_USER_PW}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
     volumes:
       - ./volumes/db-data:/var/lib/mysql
     networks:
       - backend
     healthcheck:
-      test: 'mysqladmin ping -h theater-platform-db -P 3306 -u ${DB_USER} --password="${DB_USER_PW}"'
+      test: 'mysqladmin ping -h ${DB_HOST} -P ${DB_PORT} -u ${DB_USER} --password="${DB_USER_PW}"'
+      interval: 3s
       timeout: 10s
       retries: 3
 
   app-backend:
-    container_name: theater-platform-django-api-server
+    container_name: ${API_HOST}
+    ports:
+      - '2004:${API_PORT}'
     build:
       context: backend
       dockerfile: Dockerfile
-    ports:
-      - '2004:8000'
     command: >
       sh -c 'python manage.py makemigrations &&
              python manage.py migrate &&
-             python manage.py runserver 8000'
-    restart: on-failure
+             python manage.py runserver ${API_PORT}'
     environment:
       DEBUG: '1'
-      DB_HOST: theater-platform-db
-      DB_PORT: 3306
-      DB_NAME: theater_platform
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_USER_PW}
     volumes:
@@ -55,12 +58,12 @@ services:
         condition: service_healthy
 
   app-frontend:
-    container_name: theater-platform-web-ui
+    container_name: ${UI_HOST}
+    ports:
+      - '2005:${UI_PORT}'
     build:
       context: frontend
       dockerfile: Dockerfile
-    ports:
-      - '2005:8080'
     networks:
       - frontend
 
