@@ -42,7 +42,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
 
     # Tutorials application
-    'apps.theater_platform.apps.TheaterPlatformConfig',
+    'apps.theater_platform',
 
     'rest_framework',
     'django_extensions',
