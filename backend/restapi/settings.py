@@ -42,8 +42,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 
-    # Tutorials application
+    # Main application
     'apps.theater_platform',
+    # User management
+    'apps.user_management',
 
     'rest_framework',
     'django_extensions',
@@ -150,4 +152,4 @@ GRAPH_MODELS = {
     'group_models': True,
 }
 
-AUTH_USER_MODEL = 'theater_platform.User'
+AUTH_USER_MODEL = 'user_management.User'
