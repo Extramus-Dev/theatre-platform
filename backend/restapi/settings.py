@@ -14,7 +14,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+PROJ_DIR = Path(__file__).resolve().parent
+BASE_DIR = PROJ_DIR.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +29,6 @@ SECRET_KEY = 'django-insecure-je=9r%)vlcfl%w(tos%3#9zpt!_&%27y%m2ir8zl!m#ma+jqk2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', 1))
 
-MAIN_APP = 'web_server'
 DB_HOST = os.environ.get('DB_HOST', '')
 DB_PORT = os.environ.get('DB_PORT', '')
 DB_NAME = os.environ.get('DB_NAME', '')
@@ -66,7 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = '.'.join((MAIN_APP, 'urls'),)
+ROOT_URLCONF = '.'.join((PROJ_DIR.name, 'urls'),)
 
 TEMPLATES = [
     {
@@ -84,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = '.'.join((MAIN_APP, 'wsgi', 'application'),)
+WSGI_APPLICATION = '.'.join((PROJ_DIR.name, 'wsgi', 'application'),)
 
 
 # Database
