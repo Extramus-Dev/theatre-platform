@@ -3,7 +3,7 @@
 import os
 import sys
 
-MAIN_APP = 'web_server'
+MAIN_APP = 'restapi'
 
 def main():
     """Run administrative tasks."""
