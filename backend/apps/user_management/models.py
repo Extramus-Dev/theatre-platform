@@ -45,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    last_name = models.CharField(_('last name'), max_length=128, blank=True)
     date_birth = models.DateTimeField(_('date of birth'))
 
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
