@@ -3,10 +3,11 @@
 import os
 import sys
 
+MAIN_APP = 'restapi'
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'web_server.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', '.'.join((MAIN_APP, 'settings'),))
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
