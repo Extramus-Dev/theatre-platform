@@ -1,0 +1,9 @@
+# python virtual environment
+**venv/
+
+# Dockerfile
+**Dockerfile
+
+# README files
+*.md
+**/*README*.md

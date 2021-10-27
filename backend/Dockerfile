@@ -2,15 +2,11 @@
 FROM python:3.9-alpine
 ENV PYTHONUNBUFFERED 1
 
-# Set app directory (Fix with dockerignore later)
+# Set app directory
 WORKDIR /app
-COPY manage.py        /app/manage.py
-COPY requirements.txt /app/requirements.txt
-COPY web_server       /app/web_server/
+COPY .  /app/
 
-COPY theater_platform /app/theater_platform/
-
-# Install necessary packages
+# Install necessary apps
 RUN apk update
 RUN apk add --virtual build-deps gcc python3-dev musl-dev
 RUN apk add --no-cache mariadb-dev
