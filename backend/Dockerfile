@@ -1,9 +1,11 @@
+# Set parent image for our own
 FROM python:3.9-alpine
 ENV PYTHONUNBUFFERED 1
 
-# Set app directory
+# Set app directory (Fix with dockerignore later)
 WORKDIR /app
 COPY manage.py        /app/manage.py
+COPY requirements.txt /app/requirements.txt
 COPY web_server       /app/web_server/
 
 COPY theater_platform /app/theater_platform/
@@ -15,8 +17,7 @@ RUN apk add --no-cache mariadb-dev
 
 # Install python dependencies
 RUN python -m pip install --upgrade pip
-RUN python -m pip install Django djangorestframework django-extensions
-RUN python -m pip install mysqlclient
+RUN python -m pip install -r requirements.txt
 
 # Uninstall no more necessary packages
 RUN apk del build-deps
