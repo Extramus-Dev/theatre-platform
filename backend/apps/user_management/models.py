@@ -26,9 +26,14 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, first_name, last_name, date_birth, password=None, **extra_fields):
+    def create_user(self, email, first_name, last_name, date_birth, password, **extra_fields):
         extra_fields.setdefault('is_superuser', False)
-        return self._create_user(email, password, first_name, last_name, date_birth, **extra_fields)
+        return self._create_user(
+                    email=email,
+                    password=password,
+                    first_name=first_name,
+                    last_name=last_name,
+                    date_birth=date_birth, **extra_fields)
 
     def create_superuser(self, email, first_name, last_name, date_birth, password, **extra_fields):
         extra_fields.setdefault('is_superuser', True)
@@ -45,7 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    last_name = models.CharField(_('last name'), max_length=128, blank=True)
     date_birth = models.DateTimeField(_('date of birth'))
 
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
@@ -89,8 +94,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.is_admin
 
 
+class ViewerManager(models.Manager):
+
+    def create_viewer(self, user: User):
+        viewer = self.model(user=user)
+        viewer.save(using=self._db)
+        return viewer
+
+
 class ViewerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    objects = ViewerManager()
 
 
 class ContentCreatorProfile(models.Model):
