@@ -13,6 +13,9 @@ class UserSerializer(serializers.Serializer):
         model = User
         fields = ['email', 'first_name', 'last_name', 'date_birth', 'password']
 
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
+
 
 class ViewerSerializer(serializers.Serializer):
     user = UserSerializer()
@@ -20,6 +23,24 @@ class ViewerSerializer(serializers.Serializer):
     class Meta:
         model = ViewerProfile
         fields = ['user']
+
+    def create(self, validated_data):
+        user_data = validated_data['user']
+        email = user_data['email']
+        fn = user_data['first_name']
+        ln = user_data['last_name']
+        date_birth = user_data['date_birth']
+        pw = user_data['password']
+
+        return ViewerProfile.objects.create_viewer(
+            User.objects.create_user(
+                email=email,
+                first_name=fn,
+                last_name=ln,
+                date_birth=date_birth,
+                password=pw
+            )
+        )
 
 
 class ContentCreatorSerializer(serializers.Serializer):
