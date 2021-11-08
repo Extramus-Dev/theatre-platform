@@ -26,19 +26,14 @@ class ViewerSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         user_data = validated_data['user']
-        email = user_data['email']
-        fn = user_data['first_name']
-        ln = user_data['last_name']
-        date_birth = user_data['date_birth']
-        pw = user_data['password']
 
         return ViewerProfile.objects.create_viewer(
             User.objects.create_user(
-                email=email,
-                first_name=fn,
-                last_name=ln,
-                date_birth=date_birth,
-                password=pw
+                email=user_data['email'],
+                first_name=user_data['first_name'],
+                last_name=user_data['last_name'],
+                date_birth=user_data['date_birth'],
+                password=user_data['password']
             )
         )
 
@@ -49,3 +44,16 @@ class ContentCreatorSerializer(serializers.Serializer):
     class Meta:
         model = ContentCreatorProfile
         fields = ['user']
+
+    def create(self, validated_data):
+        user_data = validated_data['user']
+
+        return ContentCreatorProfile.objects.create_viewer(
+            User.objects.create_user(
+                email=user_data['email'],
+                first_name=user_data['first_name'],
+                last_name=user_data['last_name'],
+                date_birth=user_data['date_birth'],
+                password=user_data['password']
+            )
+        )
