@@ -48,7 +48,7 @@ class ContentCreatorSerializer(serializers.Serializer):
     def create(self, validated_data):
         user_data = validated_data['user']
 
-        return ContentCreatorProfile.objects.create_viewer(
+        return ContentCreatorProfile.objects.create_cc(
             User.objects.create_user(
                 email=user_data['email'],
                 first_name=user_data['first_name'],
