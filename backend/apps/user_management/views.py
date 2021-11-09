@@ -40,5 +40,6 @@ class SignUPContentCreator(APIView):
         if serializer.is_valid():
             serializer.save()
             logger.debug(f'serializer is valid: {serializer.data}')
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         logger.warning(f'serializer error: {serializer.errors}')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
