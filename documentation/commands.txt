@@ -1,5 +1,12 @@
 #python - create graph model
 python manage.py graph_models --pydot -a -g -o appdata/erd.png
 
-curl -d '{"user":{"email":"renanaferreira1999@gmail.com", "first_name":"Renan", "last_name": "Ferreira", "date_birth": "1999-01-26", "password": "senhaforte"}}' -H "Content-Type: application/json" -X POST http://localhost:2004/users/signup/viewer
+# signup viewer
+curl -X POST http://localhost:2004/users/signup/viewer
+    -H "Content-Type: application/json"
+    -d '{"user":{"email":"renanaferreira1999@gmail.com", "first_name":"Renan", "last_name": "Ferreira", "date_birth": "1999-01-26", "password": "senhaforte"}}'
 
+# signup contentcreator
+curl -X POST http://localhost:2004/users/signup/contentcreator
+    -H "Content-Type: application/json"
+    -d '{"user":{"email":"antonio@extramus.eu", "first_name":"Antonio", "last_name": "Gallo", "date_birth": "1990-01-25", "password": "senhaforte"}}'

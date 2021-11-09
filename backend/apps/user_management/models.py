@@ -107,6 +107,14 @@ class ViewerProfile(models.Model):
 
     objects = ViewerManager()
 
+class ContentCreatorManager(models.Manager):
+
+    def create_cc(self, user: User):
+        cc = self.model(user=user)
+        cc.save(using=self._db)
+        return cc
 
 class ContentCreatorProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    objects = ContentCreatorManager()
