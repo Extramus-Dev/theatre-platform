@@ -3,3 +3,6 @@ djangorestframework
 django-extensions
 
 pymysql
+
+# Test tools
+coverage==3.6
