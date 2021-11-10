@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
 
+    # testing apps
+    'coverage',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
