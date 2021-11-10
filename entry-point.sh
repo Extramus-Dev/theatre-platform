@@ -12,7 +12,7 @@ export DB_USER='theater_admin'
 export DB_USER_PW='theater_platform2021'
 export DB_ROOT_PW=root
 
-export VUE_APP_TITLE=Theater Marketplace
+export VUE_APP_TITLE='Theater Marketplace'
 
 docker-compose build
 docker-compose up
