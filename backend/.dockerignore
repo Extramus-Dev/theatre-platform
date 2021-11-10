@@ -7,3 +7,10 @@
 # README files
 *.md
 **/*README*.md
+
+# Python
+**__pycache__
+
+# Tests units
+.coverage
+htmlcov/
