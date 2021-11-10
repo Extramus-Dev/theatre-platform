@@ -2,4 +2,4 @@ django
 djangorestframework
 django-extensions
 
-mysqlclient
+pymysql
