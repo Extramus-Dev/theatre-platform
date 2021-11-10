@@ -16,16 +16,17 @@ services:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE:      ${DB_NAME}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
       MYSQL_USER:          ${DB_USER}
       MYSQL_PASSWORD:      ${DB_USER_PW}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
     volumes:
       - ./volumes/db-data:/var/lib/mysql
+      - ./scripts/initdb.sql:/docker-entrypoint-initdb.d/1.sql
     networks:
       - backend
     healthcheck:
-      test: 'mysqladmin ping -h ${DB_HOST} -P ${DB_PORT} -u ${DB_USER} --password="${DB_USER_PW}"'
+      test: 'mysqladmin ping -h ${DB_HOST} -P ${DB_PORT} -u root --password="${DB_ROOT_PW}"'
       interval: 3s
       timeout: 10s
       retries: 3
