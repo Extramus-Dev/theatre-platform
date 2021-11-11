@@ -2,18 +2,16 @@
 
 version: '3.8'
 
-# Environment Variables
-
-
 # Different Components of the Application
 services:
 
   # Database Service (Mysql)
   app-db:
+    image: mysql
     container_name: ${DB_HOST}
     ports:
       - '2003:${DB_PORT}'
-    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_DATABASE: ${DB_NAME}
@@ -21,8 +19,8 @@ services:
       MYSQL_USER:          ${DB_USER}
       MYSQL_PASSWORD:      ${DB_USER_PW}
     volumes:
-      - ./volumes/db-data:/var/lib/mysql
-      - ./scripts/initdb.sql:/docker-entrypoint-initdb.d/1.sql
+      - ./volumes/db-data:/var/lib/mysql 
+      - ./scripts/initdb:/docker-entrypoint-initdb.d
     networks:
       - backend
     healthcheck:
@@ -31,6 +29,7 @@ services:
       timeout: 10s
       retries: 3
 
+  # Server Backend Service (Django)
   app-backend:
     container_name: ${API_HOST}
     ports:
@@ -58,6 +57,7 @@ services:
       app-db:
         condition: service_healthy
 
+  # Server Frontend Service (Vue.js)
   app-frontend:
     container_name: ${UI_HOST}
     ports:
