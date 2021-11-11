@@ -25,7 +25,6 @@ services:
       - backend
     healthcheck:
       test: 'mysqladmin ping -h ${DB_HOST} -P ${DB_PORT} -u root --password="${DB_ROOT_PW}"'
-      interval: 3s
       timeout: 10s
       retries: 3
 
@@ -53,6 +52,10 @@ services:
     networks:
       - backend
       - frontend
+    healthcheck:
+      test: 'wget -nv -t1 --spider http://localhost:${API_PORT}/healthcheck/ || exit 1'
+      timeout: 10s
+      retries: 3
     depends_on:
       app-db:
         condition: service_healthy
@@ -67,6 +70,11 @@ services:
       dockerfile: Dockerfile
     networks:
       - frontend
+    depends_on:
+      app-db:
+        condition: service_healthy
+      app-backend:
+        condition: service_healthy
 
 volumes:
   db-data:
