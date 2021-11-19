@@ -43,9 +43,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
 
     # Main application
-    'apps.theater_platform',
+    'theater_platform',
     # User management
-    'apps.user_management',
+    'user_management',
 
     'rest_framework',
     'django_extensions',

@@ -1,7 +1,7 @@
 from django.db import models
 
-from apps.user_management.models import ViewerProfile as Viewer
-from apps.user_management.models import ContentCreatorProfile as ContentCreator
+from user_management.models import ViewerProfile as Viewer
+from user_management.models import ContentCreatorProfile as ContentCreator
 
 
 class Category(models.Model):
