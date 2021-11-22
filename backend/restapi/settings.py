@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 PROJ_DIR = Path(__file__).resolve().parent
@@ -103,9 +103,15 @@ DATABASES = {
         'PASSWORD': DB_PAWO,
         'HOST': DB_HOST,
         'PORT': DB_PORT,
-    }
+    },
+    'test': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'testdb.sqlite3',
+    },
 }
 
+if 'test' in sys.argv:
+    DATABASES['default'] = DATABASES['test']
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
